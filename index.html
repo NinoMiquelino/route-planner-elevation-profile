@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planejador de Rotas com Perfil de ElevaÁ„o</title>
+    <title>Planejador de Rotas com Perfil de Eleva√ß√£o</title>
     <meta name="author" content="Onivaldo Miquelino">  
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
@@ -19,7 +19,7 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
         #elevation-profile {
-            height: 30vh; /* Gr·fico ocupa 30% da altura da viewport */
+            height: 30vh; /* Gr√°fico ocupa 30% da altura da viewport */
             width: 100%;
         }
         .container {
@@ -31,12 +31,12 @@
 <body>
 
     <div class="container">
-        <h1 class="text-center mb-4">Planejador de Rotas com Perfil de ElevaÁ„o</h1>
+        <h1 class="text-center mb-4">Planejador de Rotas com Perfil de Eleva√ß√£o</h1>
 
         <div class="row mb-3">
             <div class="col-md-6">
                 <div class="card p-3">
-                    <p class="mb-0"><strong>Dist‚ncia Total:</strong> <span id="total-distance">0.00</span> km</p>
+                    <p class="mb-0"><strong>Dist√¢ncia Total:</strong> <span id="total-distance">0.00</span> km</p>
                 </div>
             </div>
             <div class="col-md-6 text-end">
@@ -46,13 +46,13 @@
 
         <div id="map"></div>
 
-        <h2 class="mt-4 mb-3">Perfil de ElevaÁ„o Simulado</h2>
+        <h2 class="mt-4 mb-3">Perfil de Eleva√ß√£o Simulado</h2>
         <div class="card p-3">
             <canvas id="elevation-profile"></canvas>
         </div>
 
         <footer class="text-center mt-5 mb-3 text-muted">
-            Clique no mapa para traÁar sua rota.
+            Clique no mapa para tra√ßar sua rota.
         </footer>
     </div>
 
@@ -61,7 +61,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Vari·veis Globais
+        // Vari√°veis Globais
         let map;
         let routePoints = []; // Armazena objetos {lat, lng}
         let polyline;
@@ -72,10 +72,10 @@
          * Inicializa o Mapa Leaflet
          */
         function initMap() {
-            // Inicializa o mapa centrado em uma localizaÁ„o padr„o (Ex: S„o Paulo, Brasil)
+            // Inicializa o mapa centrado em uma localiza√ß√£o padr√£o (Ex: S√£o Paulo, Brasil)
             map = L.map('map').setView([-23.55052, -46.633309], 13);
 
-            // Adiciona o Tile Layer (Tiles de mapa padr„o)
+            // Adiciona o Tile Layer (Tiles de mapa padr√£o)
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             }).addTo(map);
@@ -86,16 +86,16 @@
             // Evento de Clique no Mapa
             map.on('click', onMapClick);
 
-            // Bot„o de Limpar Rota
+            // Bot√£o de Limpar Rota
             document.getElementById('clear-route').addEventListener('click', clearRoute);
 
-            // Inicializa o Gr·fico
+            // Inicializa o Gr√°fico
             initChart();
         }
 
         /**
          * Manipulador de Evento de Clique no Mapa
-         * Adiciona um novo ponto ‡ rota.
+         * Adiciona um novo ponto √† rota.
          */
         function onMapClick(e) {
             const latlng = e.latlng;
@@ -108,13 +108,13 @@
             // 2. Atualiza a Polyline
             polyline.addLatLng(latlng);
 
-            // 3. Recalcula e Atualiza InformaÁıes
+            // 3. Recalcula e Atualiza Informa√ß√µes
             updateRouteMetrics();
         }
 
         /**
-         * FunÁ„o de Dist‚ncia Haversine
-         * Calcula a dist‚ncia entre dois pontos de coordenadas (em km).
+         * Fun√ß√£o de Dist√¢ncia Haversine
+         * Calcula a dist√¢ncia entre dois pontos de coordenadas (em km).
          */
         function haversineDistance(latlng1, latlng2) {
             const R = 6371; // Raio da Terra em km
@@ -129,18 +129,18 @@
 
             const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-            return R * c; // Dist‚ncia em km
+            return R * c; // Dist√¢ncia em km
         }
 
         /**
-         * FunÁ„o de SimulaÁ„o de ElevaÁ„o
-         * Cria um perfil de elevaÁ„o simulado e realista.
-         * A elevaÁ„o muda de forma suave e aleatÛria em cada segmento.
+         * Fun√ß√£o de Simula√ß√£o de Eleva√ß√£o
+         * Cria um perfil de eleva√ß√£o simulado e realista.
+         * A eleva√ß√£o muda de forma suave e aleat√≥ria em cada segmento.
          */
         function simulateElevation(totalDistance, points) {
             let elevationData = [];
             let cumulativeDistance = 0;
-            let currentElevation = 500; // ElevaÁ„o inicial simulada (metros)
+            let currentElevation = 500; // Eleva√ß√£o inicial simulada (metros)
 
             elevationData.push({ distance: 0, elevation: currentElevation });
 
@@ -148,20 +148,20 @@
                 const segmentDistance = haversineDistance(points[i], points[i + 1]);
                 cumulativeDistance += segmentDistance;
 
-                // Simula uma mudanÁa de elevaÁ„o baseada no segmento e um pouco de aleatoriedade
-                // O fator 150/1000 simula um ganho/perda de 150 metros por km, que È bem montanhoso
+                // Simula uma mudan√ßa de eleva√ß√£o baseada no segmento e um pouco de aleatoriedade
+                // O fator 150/1000 simula um ganho/perda de 150 metros por km, que √© bem montanhoso
                 let elevationChange = (Math.random() * 2 - 1) * 150 * segmentDistance / 1000;
                 
-                // Suaviza a mudanÁa: faz com que a mudanÁa n„o seja radical demais
+                // Suaviza a mudan√ßa: faz com que a mudan√ßa n√£o seja radical demais
                 if (i > 0) {
                    const prevChange = elevationData[elevationData.length - 1].elevation - elevationData[elevationData.length - 2].elevation;
-                   // Aplica uma inÈrcia, tendendo a continuar subindo ou descendo
+                   // Aplica uma in√©rcia, tendendo a continuar subindo ou descendo
                    elevationChange = (elevationChange * 0.5) + (prevChange * 0.5); 
                 }
 
                 currentElevation += elevationChange;
 
-                // Garante que a elevaÁ„o n„o caia abaixo de um mÌnimo realista
+                // Garante que a eleva√ß√£o n√£o caia abaixo de um m√≠nimo realista
                 currentElevation = Math.max(10, currentElevation); 
                 
                 elevationData.push({
@@ -173,7 +173,7 @@
         }
 
         /**
-         * Atualiza a dist‚ncia total e o gr·fico de elevaÁ„o.
+         * Atualiza a dist√¢ncia total e o gr√°fico de eleva√ß√£o.
          */
         function updateRouteMetrics() {
             let totalDistance = 0;
@@ -183,28 +183,28 @@
                 }
             }
 
-            // Atualiza a exibiÁ„o da dist‚ncia
+            // Atualiza a exibi√ß√£o da dist√¢ncia
             document.getElementById('total-distance').textContent = totalDistance.toFixed(2);
 
-            // 2. Gera os dados de elevaÁ„o simulados
+            // 2. Gera os dados de eleva√ß√£o simulados
             const elevationData = simulateElevation(totalDistance, routePoints);
 
-            // 3. Atualiza o Gr·fico Chart.js
+            // 3. Atualiza o Gr√°fico Chart.js
             updateChart(elevationData);
         }
 
         /**
-         * Inicializa o Gr·fico Chart.js
+         * Inicializa o Gr√°fico Chart.js
          */
         function initChart() {
             const ctx = document.getElementById('elevation-profile').getContext('2d');
             elevationChart = new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: [], // Dist‚ncias
+                    labels: [], // Dist√¢ncias
                     datasets: [{
-                        label: 'Perfil de ElevaÁ„o (m)',
-                        data: [], // ElevaÁıes
+                        label: 'Perfil de Eleva√ß√£o (m)',
+                        data: [], // Eleva√ß√µes
                         borderColor: 'rgb(75, 192, 192)',
                         backgroundColor: 'rgba(75, 192, 192, 0.2)',
                         fill: true,
@@ -219,15 +219,15 @@
                         x: {
                             title: {
                                 display: true,
-                                text: 'Dist‚ncia Acumulada (km)'
+                                text: 'Dist√¢ncia Acumulada (km)'
                             }
                         },
                         y: {
                             title: {
                                 display: true,
-                                text: 'ElevaÁ„o (m)'
+                                text: 'Eleva√ß√£o (m)'
                             },
-                            beginAtZero: false // ElevaÁ„o n„o comeÁa necessariamente em zero
+                            beginAtZero: false // Eleva√ß√£o n√£o come√ßa necessariamente em zero
                         }
                     },
                     plugins: {
@@ -236,8 +236,8 @@
                         },
                         tooltip: {
                             callbacks: {
-                                title: (context) => `Dist‚ncia: ${parseFloat(context[0].label).toFixed(2)} km`,
-                                label: (context) => `ElevaÁ„o: ${context.formattedValue} m`
+                                title: (context) => `Dist√¢ncia: ${parseFloat(context[0].label).toFixed(2)} km`,
+                                label: (context) => `Eleva√ß√£o: ${context.formattedValue} m`
                             }
                         }
                     }
@@ -246,7 +246,7 @@
         }
 
         /**
-         * Atualiza os dados no Gr·fico Chart.js
+         * Atualiza os dados no Gr√°fico Chart.js
          */
         function updateChart(data) {
             const distances = data.map(item => item.distance.toFixed(2));
@@ -271,12 +271,12 @@
             markers.forEach(marker => map.removeLayer(marker));
             markers = [];
 
-            // 4. Reseta as mÈtricas e o gr·fico
+            // 4. Reseta as m√©tricas e o gr√°fico
             document.getElementById('total-distance').textContent = '0.00';
             updateChart([{ distance: 0, elevation: 0 }]);
         }
 
-        // Inicia o aplicativo quando a p·gina carregar
+        // Inicia o aplicativo quando a p√°gina carregar
         document.addEventListener('DOMContentLoaded', initMap);
     </script>
 
